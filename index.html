@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>beatmap.download - osu! beatmap mirror list</title>
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    </head>
+    <body>
+        <style>
+            @font-face {
+                font-family: 'Uni Sans';
+                src: url('./fonts/UniSansRegular.otf') format('opentype');
+            }
+            
+            /* general style */
+            html, body {
+                background-color: #36393e;
+                color: #fff;
+                font-family: 'Uni Sans', sans-serif;
+                overflow: hidden;
+            }
+            
+            a {
+                color: #7289da;
+                text-decoration: none;
+            }
+
+            /* center container */
+            .center {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            /* mirror list */
+            ul.mirror-list {
+                list-style-type: none;
+                text-align: center;
+                padding: 0;
+                margin: 0;
+            }
+            
+            ul.mirror-list > li {
+                display: inline;
+            }
+
+            ul.mirror-list > li + li::before {
+                content: " | ";
+            }
+        </style>
+        <div class="center aos-animate">
+            <h1 data-aos="fade-down">beatmap.download</h1>
+            <ul class="mirror-list" data-aos="fade-down">
+                <li data-aos="fade-right" data-aos-delay="400"><a href="https://osu.ppy.sh/beatmapsets">osu.ppy.sh (official)</a></li>
+                <li data-aos="fade-right" data-aos-delay="500"><a href="https://beatconnect.io">beatconnect.io</a></li>
+                <li data-aos="fade-right" data-aos-delay="600"><a href="https://osu.direct">osu.direct</a></li>
+                <li data-aos="fade-right" data-aos-delay="700"><a href="https://catboy.best">catboy.best</a></li>
+                <li data-aos="fade-right" data-aos-delay="800"><a href="https://chimu.moe">chimu.moe</a></li>
+                <li data-aos="fade-right" data-aos-delay="900"><a href="https://nerinyan.moe">nerinyan.moe</a></li>
+            </ul>
+        </div>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+    </body>
+</html>
