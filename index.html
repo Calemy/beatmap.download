@@ -1,71 +1,53 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>beatmap.download - osu! beatmap mirror list</title>
+        <!-- metadata -->
+        <title>beatmap.download - a osu! beatmap mirror list</title>
         <meta content="beatmap.download" property="og:title" />
         <meta content="a osu! beatmap mirror list" property="og:description" />
         <meta content="https://beatmap.download" property="og:url" />
         <meta content="#7289da" data-react-helmet="true" name="theme-color" />
+
+        <!-- stylesheets -->
+        <link href="./style.css" rel="stylesheet">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     </head>
-    <body>
-        <style>
-            @font-face {
-                font-family: 'Uni Sans';
-                src: url('./UniSansRegular.otf') format('opentype');
-            }
-            
-            /* general style */
-            html, body {
-                background-color: #36393e;
-                color: #fff;
-                font-family: 'Uni Sans', sans-serif;
-                overflow: hidden;
-            }
-            
-            a {
-                color: #7289da;
-                text-decoration: none;
-            }
 
-            /* center container */
-            .center {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-            }
-
-            /* mirror list */
-            ul.mirror-list {
-                list-style-type: none;
-                text-align: center;
-                padding: 0;
-                margin: 0;
-            }
+    <body class="aos-animate">
+        <div class="center">
+            <div class="header">
+                <h1 class="title" data-aos="fade-down" data-aos-delay="500">beatmap.download</h1>
+                <p class="caption" data-aos="fade-down" data-aos-delay="500">a osu! beatmap mirror list</p>
+            </div>
+            <div class="mirror-list">
+                <div class="mirror" data-aos="fade-in" data-aos-delay="600">
+                    <h3>osu.direct</h3>
+                </div>
+                <div class="mirror" data-aos="fade-in" data-aos-delay="700">
+                    <h3>catboy.best</h3>
+                </div>
+                <div class="mirror" data-aos="fade-in" data-aos-delay="800">
+                    <h3>chimu.moe</h3>
+                </div>
+                <div class="mirror" data-aos="fade-in" data-aos-delay="900">
+                    <h3>beatconnect.io</h3>
+                </div>
+                <div class="mirror" data-aos="fade-in" data-aos-delay="1000">
+                    <h3>nerinyan.moe</h3>
+                </div>
+            </div>
             
-            ul.mirror-list > li {
-                display: inline;
-            }
-
-            ul.mirror-list > li + li::before {
-                content: " | ";
-            }
-        </style>
-        <div class="center aos-animate">
-            <h1 data-aos="fade-down">beatmap.download</h1>
-            <ul class="mirror-list" data-aos="fade-down">
-                <li data-aos="fade-right" data-aos-delay="400"><a href="https://osu.ppy.sh/beatmapsets">osu.ppy.sh (official)</a></li>
-                <li data-aos="fade-right" data-aos-delay="500"><a href="https://beatconnect.io">beatconnect.io</a></li>
-                <li data-aos="fade-right" data-aos-delay="600"><a href="https://osu.direct">osu.direct</a></li>
-                <li data-aos="fade-right" data-aos-delay="700"><a href="https://catboy.best">catboy.best</a></li>
-                <li data-aos="fade-right" data-aos-delay="800"><a href="https://chimu.moe">chimu.moe</a></li>
-                <li data-aos="fade-right" data-aos-delay="900"><a href="https://nerinyan.moe">nerinyan.moe</a></li>
-            </ul>
         </div>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
+        <div class="footer animate__animated animate__fadeIn animate__delay-1s">
+                Powered by Yoru.
+        </div>
+        
+        <!-- javascript -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script src="./script.js"></script>
+        <script>
+            AOS.init();
+        </script>
     </body>
 </html>

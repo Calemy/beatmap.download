@@ -1,0 +1,112 @@
+@font-face {
+    font-family: 'Uni Sans';
+    src: url('./UniSansRegular.otf') format('opentype');
+}
+
+/* general style */
+html,
+body {
+    background-color: #11111b;
+    color: #CDD5F4;
+
+    font-family: 'Uni Sans', sans-serif;
+
+    overflow: hidden;
+}
+
+a {
+    color: #7289da;
+    text-decoration: none;
+}
+
+/* center container */
+.center {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    min-height: calc(100vh - 40px);
+    margin-bottom: 5vh;
+}
+
+/* mirror-list & mirror child */
+div.mirror-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+}
+
+div.mirror-list>div.mirror {
+    margin: 5px;
+    padding: 25px;
+    box-sizing: border-box;
+
+    border-radius: 1vw;
+    border-color: #CDD5F4;
+    border-width: 2px;
+    border-style: dashed;
+
+    background-color: #1E1E2E;
+    text-align: center;
+
+    width: 40%;
+}
+
+/* mobile responsive */
+@media only screen and (max-width: 1024px) {
+
+    html,
+    body {
+        overflow-y: visible;
+    }
+
+    div.mirror-list {
+        flex-direction: column;
+    }
+
+    div.mirror-list>div.mirror {
+        width: 40vw;
+    }
+}
+
+/* scrollbar */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1E1E2E;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #CDD5F4;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #d9d9d9;
+}
+
+/* title & caption */
+div.header {
+    text-align: center;
+    margin: 0 0 2em 0;
+}
+
+div.header>h1.title,
+div.header>p.caption {
+    margin: 0;
+}
+
+/* footer */
+div.footer {
+    text-align: center;
+    height: 40px;
+}
