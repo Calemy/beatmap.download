@@ -27,7 +27,7 @@ var options = {
     },
     series: [],
     chart: {
-        width: 500,
+        width: "200%",
         background: "#1E1E2E",
         fontFamily: 'Uni Sans',
         type: 'bar',
@@ -58,7 +58,15 @@ var options = {
                 return `${value}%`
             }
         }
-    }
+    },
+    responsive: [{
+        breakpoint: 1024,
+        options: {
+            chart: {
+                width: "140%"
+            }
+        }
+    }]
 }
 
 var chart = new ApexCharts(document.querySelector("#uptime-chart"), options)
