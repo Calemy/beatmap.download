@@ -135,7 +135,7 @@ var searchOptions = {
     enabled: false
   },
   title: {
-    text: 'Search latency to Date',
+    text: 'Search latency (last hour)',
     align: 'center'
   },
   xaxis: {
