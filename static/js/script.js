@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let response = await fetch(`${apiUrl}/servers/average`)
   let json = await response.json();
 
-  //sort json by response time
+  // sort json by response time
   json = Object.fromEntries(
     Object.entries(json).sort(([, a], [, b]) => (a.search.average.latency - b.search.average.latency))
   );
