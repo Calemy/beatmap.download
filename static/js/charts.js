@@ -17,17 +17,18 @@ const reloadSeries = async () => {
 }
 
 const updateUptimeSeries = (json) => {
-  uptimeChart.updateSeries([])
+  let series = []
   Object.entries(json).forEach(([mirror, data]) => {
-    uptimeChart.appendSeries({
+    series.push({
       name: mirror,
-      data: [((data.download.average.uptime + data.search.average.uptime) / 2) * 100]
+      data: [(((data.download.average.uptime + data.search.average.uptime) / 2) * 100).toFixed(2)]
     })
   });
+  uptimeChart.updateSeries(series)
 };
 
 const updateSearchLatencySeries = (json) => {
-  searchChart.updateSeries([])
+  let series = []
   Object.entries(json).forEach(([mirror, data]) => {
     let categories = data.search.time.splice(data.search.latency.length - 10, data.search.latency.length);
     categories = categories.map((time) => {
@@ -36,11 +37,12 @@ const updateSearchLatencySeries = (json) => {
     });
 
     const dataa = data.search.latency.splice(data.search.latency.length - 10, data.search.latency.length);
-    searchChart.appendSeries({
+    series.push({
       name: mirror,
       type: 'line',
       data: dataa
     });
+    searchChart.updateSeries(series)
     searchChart.updateOptions({
       xaxis: {
         categories: categories
@@ -77,12 +79,19 @@ var uptimeOptions = {
     enabled: false
   },
   title: {
-    text: 'Uptime % to Date',
+    text: 'Uptime % (all time)',
     align: 'center'
   },
   yaxis: {
     max: 100,
-    min: 90
+    min: 90,
+    decimalsInFloat: 0,
+
+    labels: {
+      formatter: function (value, index) {
+        return `${value}%`
+      }
+    }
   },
   xaxis: {
     categories: [''],
