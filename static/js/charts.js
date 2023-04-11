@@ -21,14 +21,14 @@ function updateUptimeSeries(json) {
 function updateSearchLatencySeries(json) {
   searchChart.updateSeries([])
   Object.entries(json).forEach(([mirror, data]) => {
-    let categories = data.search.time.reverse().splice(data.search.time.length - 30, data.search.time.length).reverse();
+    let categories = data.search.time.splice(data.search.latency.length - 10, data.search.latency.length);
     categories = categories.map((time) => {
-      const newTime = new Date(time * 1000).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+      const newTime = moment(new Date(time * 1000)).fromNow();
       console.log(time, newTime);
       return newTime;
     });
 
-    const dataa = data.search.latency.reverse().splice(data.search.latency.length - 30, data.search.latency.length).reverse();
+    const dataa = data.search.latency.splice(data.search.latency.length - 10, data.search.latency.length);
     searchChart.appendSeries({
       name: mirror,
       type: 'line',
