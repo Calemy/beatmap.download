@@ -65,7 +65,12 @@ var options = {
                 width: "140%"
             }
         }
-    }]
+    }],
+    legend: {
+        onItemClick: {
+            toggleDataSeries: false
+        }
+    }
 }
 
 var chart = new ApexCharts(document.querySelector("#uptime-chart"), options)
