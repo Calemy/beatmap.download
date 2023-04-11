@@ -50,7 +50,7 @@ var options = {
         min: 90
     },
     xaxis: {
-        categories: ['Uptime'],
+        categories: [''],
     },
     tooltip: {
         y: {
