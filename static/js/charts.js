@@ -54,9 +54,9 @@ const updateSearchLatencySeries = (json) => {
 var uptimeOptions = {
   theme: {
     mode: 'dark',
-    palette: 'palette1',
+    palette: 'palette8',
     monochrome: {
-      enabled: true,
+      enabled: false,
       color: '#7171ff',
       shadeTo: 'light',
       shadeIntensity: 1
@@ -121,9 +121,9 @@ var uptimeOptions = {
 var searchOptions = {
   theme: {
     mode: 'dark',
-    palette: 'palette1',
+    palette: 'palette8',
     monochrome: {
-      enabled: true,
+      enabled: false,
       color: '#7171ff',
       shadeTo: 'light',
       shadeIntensity: 1
@@ -156,6 +156,7 @@ var searchOptions = {
     type: 'category',
   },
   tooltip: {
+    inverseOrder: true,
     y: {
       formatter: function (value, options) {
         return `${value}ms`
