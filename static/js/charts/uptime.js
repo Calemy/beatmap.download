@@ -2,7 +2,10 @@
     let response = await fetch("/api/servers/average")
     let json = await response.json()
 
+    // clear series
     chart.updateSeries([])
+    
+    // append data
     Object.entries(json).forEach(([mirror, data]) => {
         chart.appendSeries({
             name: mirror,
@@ -10,9 +13,11 @@
         })
     });
 
+    // loop every 5 minutes
     setTimeout(updateSeries, 60 * 1000 * 5)
 })()
 
+// cursed chart options
 var options = {
     theme: {
         mode: 'dark', 
@@ -73,5 +78,6 @@ var options = {
     }
 }
 
+// render chart
 var chart = new ApexCharts(document.querySelector("#uptime-chart"), options)
 chart.render()
