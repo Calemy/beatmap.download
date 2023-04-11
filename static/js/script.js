@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', async () => {
   let response = await fetch("https://beatmap.download/api/servers/average")
   let json = await response.json();
-  
+
   //sort json by response time
   json = Object.fromEntries(
-    Object.entries(json).sort(([,a],[,b]) => (a.search.average.latency - b.search.average.latency))
+    Object.entries(json).sort(([, a], [, b]) => (a.search.average.latency - b.search.average.latency))
   );
 
   let index = 6;
-  Object.entries(json).forEach(([mirror, data]) => {
+  Object.entries(json).forEach(([mirror, _data]) => {
     const mirrorCard = document.createElement('div');
     mirrorCard.classList.add('mirror');
     const mirrorText = document.createElement('a');
@@ -21,5 +21,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('mirror-list').appendChild(mirrorCard);
     index++;
   });
-  await updateSeries(json);
+  reloadSeries();
 });

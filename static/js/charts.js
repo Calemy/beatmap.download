@@ -1,25 +1,46 @@
 const reloadSeries = async () => {
-  let response = await fetch("https://beatmap.download/api/servers/average")
-  let json = await response.json()
-  await updateSeries(json);
+  let recentResponse = await fetch("https://beatmap.download/api/servers/average")
+  let recentDataJson = await recentResponse.json()
+  let allResponse = await fetch("https://beatmap.download/api/servers")
+  let allDataJson = await allResponse.json()
+  updateUptimeSeries(recentDataJson);
+  updateSearchLatencySeries(allDataJson);
+  setTimeout(reloadSeries, 60 * 1000 * 5)
 }
 
-async function updateSeries(json) {
+function updateUptimeSeries(json) {
   uptimeChart.updateSeries([])
-  searchChart.updateSeries([])
   Object.entries(json).forEach(([mirror, data]) => {
     uptimeChart.appendSeries({
       name: mirror,
       data: [((data.download.average.uptime + data.search.average.uptime) / 2) * 100]
     })
+  });
+};
+
+function updateSearchLatencySeries(json) {
+  searchChart.updateSeries([])
+  Object.entries(json).forEach(([mirror, data]) => {
+    let categories = data.search.time.reverse().splice(data.search.time.length - 30, data.search.time.length).reverse();
+    categories = categories.map((time) => {
+      const newTime = new Date(time * 1000).toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
+      console.log(time, newTime);
+      return newTime;
+    });
+
+    const dataa = data.search.latency.reverse().splice(data.search.latency.length - 30, data.search.latency.length).reverse();
     searchChart.appendSeries({
       name: mirror,
-      data: [(Math.trunc(data.search.average.latency))]
+      type: 'line',
+      data: dataa
+    });
+    searchChart.updateOptions({
+      xaxis: {
+        categories: categories
+      }
     })
   });
-
-  setTimeout(reloadSeries, 60 * 1000 * 5)
-};
+}
 
 var uptimeOptions = {
   theme: {
@@ -92,13 +113,16 @@ var searchOptions = {
     width: "200%",
     background: "#1E1E2E",
     fontFamily: 'Uni Sans',
-    type: 'bar',
+    type: 'line',
     zoom: {
       enabled: false
     },
     toolbar: {
       show: false
     },
+  },
+  stroke: {
+    curve: 'smooth'
   },
   dataLabels: {
     enabled: false
@@ -107,11 +131,8 @@ var searchOptions = {
     text: 'Search latency to Date',
     align: 'center'
   },
-  yaxis: {
-    min: 0,
-  },
   xaxis: {
-    categories: [''],
+    type: 'category',
   },
   tooltip: {
     y: {
