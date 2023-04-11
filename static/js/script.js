@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     Object.entries(json).sort(([,a],[,b]) => (a.search.average.latency - b.search.average.latency))
   );
 
-  console.log(json);
-
   let index = 6;
   Object.entries(json).forEach(([mirror, data]) => {
     const mirrorCard = document.createElement('div');
