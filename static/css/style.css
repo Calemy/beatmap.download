@@ -130,6 +130,14 @@ div.footer {
   height: 40px;
 }
 
+/* chart-list */
+div.chart-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 20px;
+}
+
 /* chart */
 div.chart-style {
   background-color: #1E1E2E;
