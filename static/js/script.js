@@ -1,6 +1,13 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  let response = await fetch("/api/servers/average")
-  let json = await response.json()
+  let response = await fetch("https://beatmap.download/api/servers/average")
+  let json = await response.json();
+  
+  //sort json by response time
+  json = Object.fromEntries(
+    Object.entries(json).sort(([,a],[,b]) => (a.search.average.latency - b.search.average.latency))
+  );
+
+  console.log(json);
 
   let index = 6;
   Object.entries(json).forEach(([mirror, data]) => {
