@@ -2,15 +2,14 @@
     let response = await fetch("/api/servers/average")
     let json = await response.json()
 
-    let series = [];
+    chart.updateSeries([])
     Object.entries(json).forEach(([mirror, data]) => {
-        series.push({
+        chart.appendSeries({
             name: mirror,
             data: [((data.download.average.uptime + data.search.average.uptime) / 2) * 100]
         })
     });
 
-    chart.updateSeries(series)
     setTimeout(updateSeries, 60 * 1000 * 5)
 })()
 

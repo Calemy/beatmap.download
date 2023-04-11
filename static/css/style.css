@@ -129,3 +129,8 @@ div.chart-style {
     border-style: solid;
     padding: 25px;
 }
+
+/* peep the cursed css */
+div.apexcharts-legend-series[seriesname="series-1"] {
+    display: none !important;
+}
