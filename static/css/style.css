@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'Uni Sans';
-    src: url('./UniSansRegular.otf') format('opentype');
+    src: url('../fonts/UniSansRegular.otf') format('opentype');
 }
 
 /* general style */
@@ -41,6 +41,8 @@ div.mirror-list {
     align-items: center;
 
     overflow: hidden;
+
+    margin: 0 0 2em 0;
 }
 
 div.mirror-list>div.mirror {
@@ -109,4 +111,15 @@ div.header>p.caption {
 div.footer {
     text-align: center;
     height: 40px;
+}
+
+/* chart */
+div.chart-style {
+    background-color: #1E1E2E;
+    min-height: 0 !important;
+    border-radius: 1vw;
+    border-color: #CDD5F4;
+    border-width: 2px;
+    border-style: dashed;
+    padding: 25px;
 }
