@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- metadata -->
-        <meta content="beatmap.download" property="og:title" />
-        <meta content="a osu! beatmap mirror list" property="og:description" />
-        <meta content="https://beatmap.download" property="og:url" />
-        <meta content="#7289da" data-react-helmet="true" name="theme-color" />
 
-        <!-- stylesheets -->
-        <link href="./static/css/style.css" rel="stylesheet">
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    </head>
+<head>
+    <!-- metadata -->
+    <meta content="beatmap.download" property="og:title" />
+    <meta content="a osu! beatmap mirror list" property="og:description" />
+    <meta content="https://beatmap.download" property="og:url" />
+    <meta content="#7289da" data-react-helmet="true" name="theme-color" />
 
-    <body class="aos-animate">
-        <div class="center">
-            <div class="header">
-                <h1 class="title" data-aos="fade-down" data-aos-delay="500">beatmap.download</h1>
-                <p class="caption" data-aos="fade-down" data-aos-delay="500">a osu! beatmap mirror list</p>
-            </div>
-            <div class="mirror-list" id="mirror-list">
-            </div>
-            <div id="uptime-chart" class="chart-style" data-aos="fade-in" data-aos-delay="1100"></div> 
+    <!-- stylesheets -->
+    <link href="./static/css/style.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+</head>
+
+<body class="aos-animate">
+    <div class="center">
+        <div class="header">
+            <h1 class="title" data-aos="fade-down" data-aos-delay="500">beatmap.download</h1>
+            <p class="caption" data-aos="fade-down" data-aos-delay="500">a osu! beatmap mirror list</p>
         </div>
-        <div class="footer animate__animated animate__fadeIn animate__delay-1s">
-                Created with <span style="color: #ffaeae">&#10084;</span> by Yoru, HorizonCode & Lemres | Powered by Kagenko
+        <div class="mirror-list" id="mirror-list">
         </div>
-        
-        <!-- javascript -->
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-        <script src="./static/js/script.js"></script>
-        <script src="./static/js/title.js"></script>
-        <script src="./static/js/charts/uptime.js"></script>
-        <script>
-            AOS.init();
-        </script>
-    </body>
+        <div id="uptime-chart" class="chart-style" data-aos="fade-in" data-aos-delay="1100"></div>
+    </div>
+    <div class="footer animate__animated animate__fadeIn animate__delay-1s">
+        Created with <span style="color: #ffaeae">&#10084;</span> by Yoru, HorizonCode & Lemres | Powered by Kagenko
+    </div>
+
+    <!-- javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="./static/js/script.js"></script>
+    <script src="./static/js/title.js"></script>
+    <script src="./static/js/charts/uptime.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
 </html>
