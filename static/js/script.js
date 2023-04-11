@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  let response = await fetch("https://beatmap.download/api/servers/average")
+  let response = await fetch("/api/servers/average")
   let json = await response.json()
 
   let index = 6;
