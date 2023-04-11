@@ -1,15 +1,15 @@
 const initSeries = async (json) => {
   updateUptimeSeries(json);
-  let allResponse = await fetch("/api/servers");
+  let allResponse = await fetch(`${apiUrl}/servers`);
   let allDataJson = await allResponse.json();
   updateSearchLatencySeries(allDataJson);
   setTimeout(reloadSeries, 60 * 1000 * 5)
 }
 
 const reloadSeries = async () => {
-  let recentResponse = await fetch("/api/servers/average");
+  let recentResponse = await fetch(`${apiUrl}/servers/average`);
   let recentDataJson = await recentResponse.json();
-  let allResponse = await fetch("/api/servers");
+  let allResponse = await fetch(`${apiUrl}/servers`);
   let allDataJson = await allResponse.json();
   updateUptimeSeries(recentDataJson);
   updateSearchLatencySeries(allDataJson);
@@ -32,7 +32,6 @@ const updateSearchLatencySeries = (json) => {
     let categories = data.search.time.splice(data.search.latency.length - 10, data.search.latency.length);
     categories = categories.map((time) => {
       const newTime = moment(new Date(time * 1000)).fromNow();
-      console.log(time, newTime);
       return newTime;
     });
 

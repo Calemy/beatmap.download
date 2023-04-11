@@ -1,5 +1,7 @@
+const apiUrl = window.location.href.includes("localhost") ? "http://beatmap.download/api" : "/api";
+
 document.addEventListener('DOMContentLoaded', async () => {
-  let response = await fetch("/api/servers/average")
+  let response = await fetch(`${apiUrl}/servers/average`)
   let json = await response.json();
 
   //sort json by response time
