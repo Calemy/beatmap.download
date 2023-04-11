@@ -78,6 +78,12 @@ div.mirror-list>div.mirror {
     }
 }
 
+@media only screen and (max-height: 1000px) {
+    html, body {
+        overflow-y: visible
+    }
+}
+
 /* scrollbar */
 ::-webkit-scrollbar {
     width: 5px;
