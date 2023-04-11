@@ -21,7 +21,7 @@ const updateUptimeSeries = (json) => {
   Object.entries(json).forEach(([mirror, data]) => {
     series.push({
       name: mirror,
-      data: [(((data.download.average.uptime + data.search.average.uptime) / 2) * 100).toFixed(2)]
+      data: [((data.download.average.uptime + data.search.average.uptime) / 2) * 100]
     })
   });
   uptimeChart.updateSeries(series)
@@ -84,12 +84,12 @@ var uptimeOptions = {
   },
   yaxis: {
     max: 100,
-    min: 90,
+    min: 95,
     decimalsInFloat: 0,
 
     labels: {
       formatter: function (value, index) {
-        return `${value}%`
+        return `${value.toFixed(2)}%`
       }
     }
   },
@@ -99,7 +99,7 @@ var uptimeOptions = {
   tooltip: {
     y: {
       formatter: function (value, options) {
-        return `${value}%`
+        return `${value.toFixed(2)}%`
       }
     }
   },
@@ -110,7 +110,12 @@ var uptimeOptions = {
         width: "140%"
       }
     }
-  }]
+  }],
+  legend: {
+    onItemClick: {
+      toggleDataSeries: false
+    }
+  }
 }
 
 var searchOptions = {
@@ -164,7 +169,12 @@ var searchOptions = {
         width: "140%"
       }
     }
-  }]
+  }],
+  legend: {
+    onItemClick: {
+      toggleDataSeries: false
+    }
+  }
 }
 
 var uptimeChart = new ApexCharts(document.querySelector("#uptime-chart"), uptimeOptions)
