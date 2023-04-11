@@ -53,7 +53,7 @@ div.mirror-list>div.mirror {
     border-radius: 1vw;
     border-color: #CDD5F4;
     border-width: 2px;
-    border-style: dashed;
+    border-style: solid;
 
     background-color: #1E1E2E;
     text-align: center;
@@ -126,6 +126,6 @@ div.chart-style {
     border-radius: 1vw;
     border-color: #CDD5F4;
     border-width: 2px;
-    border-style: dashed;
+    border-style: solid;
     padding: 25px;
 }
