@@ -21,5 +21,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('mirror-list').appendChild(mirrorCard);
     index++;
   });
-  reloadSeries();
+  initSeries(json);
 });

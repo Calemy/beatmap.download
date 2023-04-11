@@ -1,14 +1,22 @@
+const initSeries = async (json) => {
+  updateUptimeSeries(json);
+  let allResponse = await fetch("/api/servers");
+  let allDataJson = await allResponse.json();
+  updateSearchLatencySeries(allDataJson);
+  setTimeout(reloadSeries, 60 * 1000 * 5)
+}
+
 const reloadSeries = async () => {
-  let recentResponse = await fetch("https://beatmap.download/api/servers/average")
-  let recentDataJson = await recentResponse.json()
-  let allResponse = await fetch("https://beatmap.download/api/servers")
-  let allDataJson = await allResponse.json()
+  let recentResponse = await fetch("/api/servers/average");
+  let recentDataJson = await recentResponse.json();
+  let allResponse = await fetch("/api/servers");
+  let allDataJson = await allResponse.json();
   updateUptimeSeries(recentDataJson);
   updateSearchLatencySeries(allDataJson);
   setTimeout(reloadSeries, 60 * 1000 * 5)
 }
 
-function updateUptimeSeries(json) {
+const updateUptimeSeries = (json) => {
   uptimeChart.updateSeries([])
   Object.entries(json).forEach(([mirror, data]) => {
     uptimeChart.appendSeries({
@@ -18,7 +26,7 @@ function updateUptimeSeries(json) {
   });
 };
 
-function updateSearchLatencySeries(json) {
+const updateSearchLatencySeries = (json) => {
   searchChart.updateSeries([])
   Object.entries(json).forEach(([mirror, data]) => {
     let categories = data.search.time.splice(data.search.latency.length - 10, data.search.latency.length);
