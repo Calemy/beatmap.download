@@ -18,7 +18,7 @@ a {
 }
 
 /* center container */
-.center {
+#center {
   display: flex;
   flex-direction: column;
 

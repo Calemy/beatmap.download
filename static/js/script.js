@@ -1,6 +1,20 @@
-const apiUrl = window.location.href.includes("localhost") ? "https://beatmap.download/api" : "/api";
 
-const buildPage = async () => {
+const setServer = async (url) => {
+  resetPage()
+  setTimeout(() => buildPage(`https://${url}/api`), 500)
+}
+
+/* peep the cursed js */
+const resetPage = async () => {
+  let id = window.setTimeout(() => {}, 0)
+  while (id--) window.clearTimeout(id)
+  
+  setTimeout(() => document.getElementById("center").classList.remove("aos-animate"), 10)
+  setTimeout(() => document.querySelector(".mirror-list").innerHTML = '', 500)
+  setTimeout(() => document.getElementById("center").classList.add("aos-animate"), 500)
+}
+
+const buildPage = async (apiUrl) => {
   let resp = await fetch(`${apiUrl}/servers/average`)
   let upResp = await fetch(`${apiUrl}/servers`)
   let json = await resp.json();
@@ -43,15 +57,12 @@ const buildPage = async () => {
       mirrorCard.appendChild(degradedEndpoints)
     }
     mirrorCard.appendChild(mirrorUpDown)
-    
-    mirrorCard.dataset.aos = "fade-in";
-    mirrorCard.dataset.aosDelay = index * 100;
-    document.getElementById('mirror-list').appendChild(mirrorCard);
+    document.querySelector('.mirror-list').appendChild(mirrorCard);
     index++;
   });
-  initSeries(json);
+  initSeries(apiUrl, json);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
-  buildPage();
+  setServer('beatmap.download')
 });

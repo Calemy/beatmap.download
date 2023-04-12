@@ -12,22 +12,21 @@
     <link href="./static/css/style.css" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    
+
     <!-- javascript -->
     <script src="https://kit.fontawesome.com/3085d2b7d6.js" crossorigin="anonymous"></script>
 </head>
 
 <body class="aos-animate">
-    <div class="center">
+    <div id="center" data-aos="fade-in" data-aos-delay="500">
         <div class="header">
-            <h1 class="title" data-aos="fade-down" data-aos-delay="500">beatmap.download</h1>
-            <p class="caption" data-aos="fade-down" data-aos-delay="500">a osu! beatmap mirror list</p>
+            <h1 class="title">beatmap.download</h1>
+            <p class="caption">a osu! beatmap mirror list</p>
         </div>
-        <div class="mirror-list" id="mirror-list">
-        </div>
+        <div class="mirror-list"></div>
         <div class="chart-list">
-          <div id="uptime-chart" class="chart-style" data-aos="fade-in" data-aos-delay="1100"></div>
-          <div id="search-chart" class="chart-style" data-aos="fade-in" data-aos-delay="1200"></div>
+            <div id="uptime-chart" class="chart-style"></div>
+            <div id="search-chart" class="chart-style"></div>
         </div>
     </div>
     <div class="footer animate__animated animate__fadeIn animate__delay-1s">

@@ -1,19 +1,19 @@
-const initSeries = async (json) => {
+const initSeries = async (apiUrl, json) => {
   updateUptimeSeries(json);
   let allResponse = await fetch(`${apiUrl}/servers`);
   let allDataJson = await allResponse.json();
   updateSearchLatencySeries(allDataJson);
-  setTimeout(reloadSeries, 60 * 1000 * 1)
+  setTimeout(() => reloadSeries(apiUrl), 60 * 1000 * 1)
 }
 
-const reloadSeries = async () => {
+const reloadSeries = async (apiUrl) => {
   let recentResponse = await fetch(`${apiUrl}/servers/average`);
   let recentDataJson = await recentResponse.json();
   let allResponse = await fetch(`${apiUrl}/servers`);
   let allDataJson = await allResponse.json();
   updateUptimeSeries(recentDataJson);
   updateSearchLatencySeries(allDataJson);
-  setTimeout(reloadSeries, 60 * 1000 * 1)
+  setTimeout(() => reloadSeries(apiUrl), 60 * 1000 * 1)
 }
 
 const updateUptimeSeries = (json) => {
