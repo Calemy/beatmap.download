@@ -61,21 +61,24 @@ const buildPage = async (apiUrl) => {
     switch (upTotal) {
       case 0:
         mirrorCard.innerHTML = '<i class="fa-solid fa-circle-down fa-2x1" style="color: #FF7276"></i> ' + mirrorCard.innerHTML
-        mirrorUpDown.innerHTML = '<span>DOWN</span>'
+        mirrorUpDown.innerHTML = '<span>Offline</span>'
         break;
       case 3:
         mirrorCard.innerHTML = '<i class="fa-solid fa-circle-up fa-2x1" style="color: #90EE90"></i> ' + mirrorCard.innerHTML
-        mirrorUpDown.innerHTML = '<span>UP</span>'
+        mirrorUpDown.innerHTML = '<span>Online</span>'
         break;
       default:
         mirrorCard.innerHTML = '<i class="fa-solid fa-circle-exclamation fa-2x1" style="color: #FFC600"></i> ' + mirrorCard.innerHTML
-        mirrorUpDown.innerHTML = '<span>DEGRADED</span>'
+        mirrorUpDown.innerHTML = '<span>Degraded</span>'
 
         const degradedEndpoints = document.createElement('h3')
         degradedEndpoints.classList.add('degraded')
-        if (up[0] === 0) degradedEndpoints.innerHTML += '<span>Status</span>'
-        if (up[1] === 0) degradedEndpoints.innerHTML += '<span>Search</span>'
-        if (up[2] === 0) degradedEndpoints.innerHTML += '<span>Download</span>'
+        let down = []
+        degradedEndpoints.innerHTML += '<span>'
+        for(let i = 0; i < up.length; i++) {
+          if(up[i] === 0) down.push(i == 0 ? "Status" : i == 1 ? "Search" : "Download")
+        }
+        degradedEndpoints.innerHTML += `${down.join(" & ")} down</span>`
         mirrorCard.appendChild(degradedEndpoints)
         break;
     }
