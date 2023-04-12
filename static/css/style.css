@@ -13,7 +13,7 @@ body {
 }
 
 a {
-  color: #7289da;
+  color: #CDD5F4;
   text-decoration: none;
 }
 
@@ -67,7 +67,7 @@ div.mirror-list>div.mirror>a {
 }
 
 div.mirror-list>div.mirror>a:hover {
-  color: #ccd4f1;
+  color: #7289da;
 }
 
 div.mirror-list>div.mirror:has(h3.degraded) > h1{
