@@ -277,7 +277,7 @@ const updateUptimeSeries = (json) => {
       data: [((data.download.average.uptime + data.search.average.uptime) / 2) * 100]
     })
   });
-  uptimeChart.updateSeries(series.sort((a, b) => a.data[0] - b.data[0]))
+  uptimeChart.updateSeries(series.sort((a, b) => b.data[0] - a.data[0]))
 };
 
 var uptimeChart = new ApexCharts(document.querySelector("#uptime-chart"), chartSettings.uptime)
@@ -288,26 +288,26 @@ charts.push(new LatencyChart({
   dataType: "search",
   option: "latency",
   data: "latency",
-  title: "Search latency (last hour)"
+  title: "Search Latency (last hour)"
 }));
 charts.push(new LatencyChart({
   selector: "#download-chart",
   dataType: "download",
   option: "latency",
   data: "latency",
-  title: "Download latency (last hour)"
+  title: "Download Latency (last hour)"
 }));
 charts.push(new LatencyChart({
   selector: "#downloadtime-chart",
   dataType: "download",
   option: "download",
   data: "downloadTime",
-  title: "Download time (last hour)"
+  title: "Download Speed (last hour)"
 }));
 charts.push(new LatencyChart({
   selector: "#status-chart",
   dataType: "status",
   option: "latency",
   data: "latency",
-  title: "Status latency (last hour)"
+  title: "Status Latency (last hour)"
 }));
