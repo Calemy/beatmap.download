@@ -23,8 +23,8 @@ const resetPage = async () => {
   
   setTimeout(() => {
     document.getElementById("center").classList.remove("aos-animate")
-    setTimeout(() => document.body.setAttribute('style', 'overflow: hidden'), 20)
-    window.scrollTo(-1, -1)
+    document.body.setAttribute('style', 'overflow: hidden')
+    setTimeout(() => window.scrollTo(-1, -1), 20)
   }, 10)
   setTimeout(() => document.querySelector(".mirror-list").innerHTML = '', 500)
   setTimeout(() => {
