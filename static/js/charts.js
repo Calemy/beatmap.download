@@ -1,4 +1,72 @@
 const chartSettings = {
+  download: {
+    theme: {
+      mode: 'dark',
+      palette: 'palette8',
+      monochrome: {
+        enabled: false,
+        color: '#7171ff',
+        shadeTo: 'light',
+        shadeIntensity: 1
+      },
+    },
+    series: [],
+    chart: {
+      width: "200%",
+      background: "#1E1E2E",
+      fontFamily: 'Uni Sans',
+      type: 'line',
+      zoom: {
+        enabled: false
+      },
+      toolbar: {
+        show: false
+      },
+    },
+    stroke: {
+      curve: 'smooth'
+    },
+    dataLabels: {
+      enabled: false
+    },
+    title: {
+      text: '',
+      align: 'center'
+    },
+    xaxis: {
+      type: 'category',
+    },
+    yaxis: {
+      decimalsInFloat: 0,
+
+      labels: {
+        formatter: (value, _index) => {
+          return `${(value / 1000).toFixed(2)}s`
+        }
+      }
+    },
+    tooltip: {
+      inverseOrder: true,
+      y: {
+        formatter: (value, _options) => {
+          return `${(value / 1000).toFixed(2)}s`
+        }
+      }
+    },
+    responsive: [{
+      breakpoint: 1024,
+      options: {
+        chart: {
+          width: "140%"
+        }
+      }
+    }],
+    legend: {
+      onItemClick: {
+        toggleDataSeries: false
+      }
+    }
+  },
   latency: {
     theme: {
       mode: 'dark',
@@ -39,7 +107,7 @@ const chartSettings = {
     tooltip: {
       inverseOrder: true,
       y: {
-        formatter: function (value, options) {
+        formatter: (value, options) => {
           return `${value}ms`
         }
       }
@@ -95,7 +163,7 @@ const chartSettings = {
       decimalsInFloat: 0,
 
       labels: {
-        formatter: function (value, index) {
+        formatter: (value, index) => {
           return `${value.toFixed(2)}%`
         }
       }
@@ -105,7 +173,7 @@ const chartSettings = {
     },
     tooltip: {
       y: {
-        formatter: function (value, options) {
+        formatter: (value, options) => {
           return `${value.toFixed(2)}%`
         }
       }
@@ -130,11 +198,19 @@ const charts = [];
 
 class LatencyChart {
 
-  constructor(selector, dataType, data, title) {
+  constructor({
+    selector,
+    dataType,
+    option,
+    data,
+    title
+  }) {
+    this.selector = selector;
+    this.option = option;
     this.dataType = dataType;
     this.data = data;
     this.title = title;
-    this.chart = new ApexCharts(document.querySelector(selector), chartSettings.latency);
+    this.chart = new ApexCharts(document.querySelector(selector), chartSettings[this.option]);
     this.chart.render()
 
   }
@@ -142,7 +218,7 @@ class LatencyChart {
   updateSeries(json) {
     let series = []
     Object.entries(json).forEach(([mirror, data]) => {
-      let categories = data[this.dataType].time.splice(data[this.dataType][this.data].length - 9, data[this.dataType][this.data].length);
+      let categories = data[this.dataType].time.splice(data[this.dataType].time.length - 9, data[this.dataType].time.length);
       categories = categories.map((time) => {
         return moment(new Date(time * 1000)).fromNow()
       });
@@ -198,7 +274,31 @@ const updateUptimeSeries = (json) => {
 var uptimeChart = new ApexCharts(document.querySelector("#uptime-chart"), chartSettings.uptime)
 uptimeChart.render()
 
-charts.push(new LatencyChart("#search-chart", "search", "latency", "Search latency (last hour)"));
-charts.push(new LatencyChart("#download-chart", "download", "latency", "Download latency (last hour)"));
-charts.push(new LatencyChart("#downloadtime-chart", "download", "downloadTime", "Download time (last hour)"));
-charts.push(new LatencyChart("#status-chart", "status", "latency", "Status latency (last hour)"));
+charts.push(new LatencyChart({
+  selector: "#search-chart",
+  dataType: "search",
+  option: "latency",
+  data: "latency",
+  title: "Search latency (last hour)"
+}));
+charts.push(new LatencyChart({
+  selector: "#download-chart",
+  dataType: "download",
+  option: "latency",
+  data: "latency",
+  title: "Download latency (last hour)"
+}));
+charts.push(new LatencyChart({
+  selector: "#downloadtime-chart",
+  dataType: "download",
+  option: "download",
+  data: "downloadTime",
+  title: "Download time (last hour)"
+}));
+charts.push(new LatencyChart({
+  selector: "#status-chart",
+  dataType: "status",
+  option: "latency",
+  data: "latency",
+  title: "Status latency (last hour)"
+}));
