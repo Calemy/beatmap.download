@@ -12,9 +12,19 @@ body {
   font-family: 'Uni Sans', sans-serif;
 }
 
+body {
+  overflow: hidden;
+}
+
 a {
   color: #CDD5F4;
   text-decoration: none;
+  cursor: pointer;
+  transition: color .35s ease;
+}
+
+a:hover {
+  color: #7289da;
 }
 
 /* center container */
@@ -59,15 +69,6 @@ div.mirror-list>div.mirror {
   text-align: center;
 
   width: 40%;
-}
-
-div.mirror-list>div.mirror>a {
-  cursor: pointer;
-  transition: color .35s ease;
-}
-
-div.mirror-list>div.mirror>a:hover {
-  color: #7289da;
 }
 
 div.mirror-list>div.mirror:has(h3.degraded) > h1{
