@@ -3,7 +3,7 @@ const initSeries = async (json) => {
   let allResponse = await fetch(`${apiUrl}/servers`);
   let allDataJson = await allResponse.json();
   updateSearchLatencySeries(allDataJson);
-  setTimeout(reloadSeries, 60 * 1000 * 5)
+  setTimeout(reloadSeries, 60 * 1000 * 1)
 }
 
 const reloadSeries = async () => {
@@ -13,7 +13,7 @@ const reloadSeries = async () => {
   let allDataJson = await allResponse.json();
   updateUptimeSeries(recentDataJson);
   updateSearchLatencySeries(allDataJson);
-  setTimeout(reloadSeries, 60 * 1000 * 5)
+  setTimeout(reloadSeries, 60 * 1000 * 1)
 }
 
 const updateUptimeSeries = (json) => {
@@ -30,18 +30,18 @@ const updateUptimeSeries = (json) => {
 const updateSearchLatencySeries = (json) => {
   let series = []
   Object.entries(json).forEach(([mirror, data]) => {
-    let categories = data.search.time.splice(data.search.latency.length - 10, data.search.latency.length);
+    let categories = data.search.time.splice(data.search.latency.length - 9, data.search.latency.length);
     categories = categories.map((time) => {
-      const newTime = moment(new Date(time * 1000)).fromNow();
-      return newTime;
+      return moment(new Date(time * 1000)).fromNow()
     });
 
-    const dataa = data.search.latency.splice(data.search.latency.length - 10, data.search.latency.length);
+    const dataa = data.search.latency.splice(data.search.latency.length - 9, data.search.latency.length);
     series.push({
       name: mirror,
       type: 'line',
       data: dataa
     });
+
     searchChart.updateSeries(series)
     searchChart.updateOptions({
       xaxis: {
@@ -84,7 +84,7 @@ var uptimeOptions = {
   },
   yaxis: {
     max: 100,
-    min: 95,
+    min: 93,
     decimalsInFloat: 0,
 
     labels: {
