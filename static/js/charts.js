@@ -279,26 +279,26 @@ charts.push(new LatencyChart({
   dataType: "search",
   option: "latency",
   data: "latency",
-  title: "Search latency (last hour)"
+  title: "Search Latency (last hour)"
 }));
 charts.push(new LatencyChart({
   selector: "#download-chart",
   dataType: "download",
   option: "latency",
   data: "latency",
-  title: "Download latency (last hour)"
+  title: "Download Latency (last hour)"
 }));
 charts.push(new LatencyChart({
   selector: "#downloadtime-chart",
   dataType: "download",
   option: "download",
   data: "downloadTime",
-  title: "Download time (last hour)"
+  title: "Download Speed (last hour)"
 }));
 charts.push(new LatencyChart({
   selector: "#status-chart",
   dataType: "status",
   option: "latency",
   data: "latency",
-  title: "Status latency (last hour)"
+  title: "Status Latency (last hour)"
 }));
