@@ -43,10 +43,12 @@ div.mirror-list {
   overflow: hidden;
 
   margin: 0 0 2em 0;
+
+  width: 70%;
 }
 
 div.mirror-list>div.mirror {
-  margin: 5px;
+  margin: 10px;
   padding: 25px;
   box-sizing: border-box;
 
@@ -70,20 +72,30 @@ div.mirror-list>div.mirror>a:hover {
   color: #ccd4f1;
 }
 
-/* mobile responsive */
-@media only screen and (max-width: 1024px) {
+div.mirror-list>div.mirror:has(h3.degraded) > h1{
+  margin-top: 0;
+}
 
-  html,
-  body {
-    overflow-y: visible;
+div.mirror-list>div.mirror:not(:has(h3.degraded)) > h1{
+  margin-bottom: 2.5rem;
+}
+
+div.mirror-list>div.mirror>h3.degraded {
+  margin-bottom: 0;
+}
+
+div.mirror-list>div.mirror>h3.degraded>span:not(:last-child):after {
+  content: " & ";
   }
 
+/* mobile responsive */
+@media only screen and (max-width: 1024px) {
   div.mirror-list {
     flex-direction: column;
   }
 
   div.mirror-list>div.mirror {
-    width: 40vw;
+    width: 50vw;
   }
 }
 
