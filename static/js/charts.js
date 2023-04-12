@@ -130,24 +130,24 @@ const charts = [];
 
 class LatencyChart {
 
-  constructor(selector, latencyType, title) {
-    this.latencyType = latencyType;
+  constructor(selector, dataType, data, title) {
+    this.dataType = dataType;
+    this.data = data;
     this.title = title;
     this.chart = new ApexCharts(document.querySelector(selector), chartSettings.latency);
     this.chart.render()
-    
+
   }
 
   updateSeries(json) {
     let series = []
-    console.log("updating")
     Object.entries(json).forEach(([mirror, data]) => {
-      let categories = data[this.latencyType].time.splice(data[this.latencyType].latency.length - 9, data.search.latency.length);
+      let categories = data[this.dataType].time.splice(data[this.dataType][this.data].length - 9, data[this.dataType][this.data].length);
       categories = categories.map((time) => {
         return moment(new Date(time * 1000)).fromNow()
       });
 
-      const dataa = data[this.latencyType].latency.splice(data[this.latencyType].latency.length - 9, data.search.latency.length);
+      const dataa = data[this.dataType][this.data].splice(data[this.dataType][this.data].length - 9, data[this.dataType][this.data].length);
       series.push({
         name: mirror,
         type: 'line',
@@ -198,6 +198,7 @@ const updateUptimeSeries = (json) => {
 var uptimeChart = new ApexCharts(document.querySelector("#uptime-chart"), chartSettings.uptime)
 uptimeChart.render()
 
-charts.push(new LatencyChart("#search-chart", "search", "Search latency (last hour)"));
-charts.push(new LatencyChart("#download-chart", "download", "Download latency (last hour)"));
-charts.push(new LatencyChart("#status-chart", "status", "Status latency (last hour)"));
+charts.push(new LatencyChart("#search-chart", "search", "latency", "Search latency (last hour)"));
+charts.push(new LatencyChart("#download-chart", "download", "latency", "Download latency (last hour)"));
+charts.push(new LatencyChart("#downloadtime-chart", "download", "downloadTime", "Download time (last hour)"));
+charts.push(new LatencyChart("#status-chart", "status", "latency", "Status latency (last hour)"));
