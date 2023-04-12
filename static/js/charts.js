@@ -251,12 +251,21 @@ const initSeries = async (apiUrl, json, allDataJson) => {
 }
 
 const reloadSeries = async (apiUrl) => {
-  let recentResponse = await fetch(`${apiUrl}/servers/average`);
-  let recentDataJson = await recentResponse.json();
-  let allResponse = await fetch(`${apiUrl}/servers`);
-  let allDataJson = await allResponse.json();
-  updateUptimeSeries(recentDataJson);
-  charts.forEach(chart => chart.updateSeries(allDataJson))
+  const avgResp = await fetch(`${apiUrl}/servers/average`)
+  const upResp = await fetch(`${apiUrl}/servers`)
+  const avgJson = await avgResp.json();
+  const upJson = await upResp.json();
+
+  const sortedAvgJson = Object.fromEntries(
+    Object.entries(avgJson).sort(([, a], [, b]) => (a.search.average.latency - b.search.average.latency))
+  );
+
+  const sortedUpJson = Object.fromEntries(
+    Object.entries(upJson).sort(([, a], [, b]) => (a.search.average.latency - b.search.average.latency))
+  );
+
+  updateUptimeSeries(sortedAvgJson);
+  charts.forEach(chart => chart.updateSeries(sortedUpJson))
   setTimeout(() => reloadSeries(apiUrl), 60 * 1000 * 1)
 }
 

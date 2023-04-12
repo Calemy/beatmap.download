@@ -34,17 +34,21 @@ const resetPage = async () => {
 }
 
 const buildPage = async (apiUrl) => {
-  const resp = await fetch(`${apiUrl}/servers/average`)
+  const avgResp = await fetch(`${apiUrl}/servers/average`)
   const upResp = await fetch(`${apiUrl}/servers`)
-  const avgJson = await resp.json();
-  const upJson = await upResp.json()
+  const avgJson = await avgResp.json();
+  const upJson = await upResp.json();
 
   // sort json by resp time
-  const sortedJson = Object.fromEntries(
+  const sortedAvgJson = Object.fromEntries(
     Object.entries(avgJson).sort(([, a], [, b]) => (a.search.average.latency - b.search.average.latency))
   );
 
-  Object.entries(sortedJson).forEach(([mirror, _data]) => {
+  const sortedUpJson = Object.fromEntries(
+    Object.entries(upJson).sort(([, a], [, b]) => (a.search.average.latency - b.search.average.latency))
+  );
+
+  Object.entries(sortedAvgJson).forEach(([mirror, _data]) => {
     const mirrorCard = document.createElement('div');
     mirrorCard.classList.add('mirror');
 
@@ -54,7 +58,7 @@ const buildPage = async (apiUrl) => {
     mirrorText.target = "_blank";
     mirrorCard.appendChild(mirrorText);
 
-    const up = [upJson[mirror].status.uptime.slice(-1)[0], upJson[mirror].search.uptime.slice(-1)[0], upJson[mirror].download.uptime.slice(-1)[0]]
+    const up = [sortedUpJson[mirror].status.uptime.slice(-1)[0], sortedUpJson[mirror].search.uptime.slice(-1)[0], sortedUpJson[mirror].download.uptime.slice(-1)[0]]
     const upTotal = up.reduce((a, b) => a + b, 0)
     const mirrorUpDown = document.createElement('h1');
 
@@ -83,7 +87,7 @@ const buildPage = async (apiUrl) => {
     mirrorCard.appendChild(mirrorUpDown)
     document.querySelector('.mirror-list').appendChild(mirrorCard);
   });
-  initSeries(apiUrl, sortedJson, upJson);
+  initSeries(apiUrl, sortedAvgJson, sortedUpJson);
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
