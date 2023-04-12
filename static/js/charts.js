@@ -218,12 +218,12 @@ class LatencyChart {
   updateSeries(json) {
     let series = []
     Object.entries(json).forEach(([mirror, data]) => {
-      let categories = data[this.dataType].time.splice(data[this.dataType].time.length - 9, data[this.dataType].time.length);
+      let categories = data[this.dataType].time.splice(data[this.dataType].time.length - 12, data[this.dataType].time.length);
       categories = categories.map((time) => {
-        return moment(new Date(time * 1000)).fromNow()
+        return new Intl.RelativeTimeFormat('en', { numeric: 'auto' }).format(-(Math.floor((Date.now() / 1000 - time) / 60)), "minutes")
       });
 
-      const dataa = data[this.dataType][this.data].splice(data[this.dataType][this.data].length - 9, data[this.dataType][this.data].length);
+      const dataa = data[this.dataType][this.data].splice(data[this.dataType][this.data].length - 12, data[this.dataType][this.data].length);
       series.push({
         name: mirror,
         type: 'line',
@@ -279,26 +279,19 @@ charts.push(new LatencyChart({
   dataType: "search",
   option: "latency",
   data: "latency",
-  title: "Search Latency (last hour)"
-}));
-charts.push(new LatencyChart({
-  selector: "#download-chart",
-  dataType: "download",
-  option: "latency",
-  data: "latency",
-  title: "Download Latency (last hour)"
+  title: "Search Time (last hour)"
 }));
 charts.push(new LatencyChart({
   selector: "#downloadtime-chart",
   dataType: "download",
   option: "download",
   data: "downloadTime",
-  title: "Download Speed (last hour)"
+  title: "Download Speed (last hour) (98.7MB)"
 }));
 charts.push(new LatencyChart({
   selector: "#status-chart",
   dataType: "status",
   option: "latency",
   data: "latency",
-  title: "Status Latency (last hour)"
+  title: "Latency (last hour)"
 }));
