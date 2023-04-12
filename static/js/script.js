@@ -1,10 +1,12 @@
-const apiUrl = window.location.href.includes("localhost") ? "http://beatmap.download/api" : "/api";
+const apiUrl = window.location.href.includes("localhost") ? "https://beatmap.download/api" : "/api";
 
-document.addEventListener('DOMContentLoaded', async () => {
-  let response = await fetch(`${apiUrl}/servers/average`)
-  let json = await response.json();
+const buildPage = async () => {
+  let resp = await fetch(`${apiUrl}/servers/average`)
+  let upResp = await fetch(`${apiUrl}/servers`)
+  let json = await resp.json();
+  let upJson = await upResp.json()
 
-  // sort json by response time
+  // sort json by resp time
   json = Object.fromEntries(
     Object.entries(json).sort(([, a], [, b]) => (a.search.average.latency - b.search.average.latency))
   );
@@ -13,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   Object.entries(json).forEach(([mirror, _data]) => {
     const mirrorCard = document.createElement('div');
     mirrorCard.classList.add('mirror');
+
     const mirrorText = document.createElement('a');
     mirrorText.innerText = mirror;
     mirrorText.href = `https://${mirror}`;
@@ -40,10 +43,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       mirrorCard.appendChild(degradedEndpoints)
     }
     mirrorCard.appendChild(mirrorUpDown)
+    
     mirrorCard.dataset.aos = "fade-in";
     mirrorCard.dataset.aosDelay = index * 100;
     document.getElementById('mirror-list').appendChild(mirrorCard);
     index++;
   });
   initSeries(json);
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+  buildPage();
 });
