@@ -24,7 +24,7 @@ const updateUptimeSeries = (json) => {
       data: [((data.download.average.uptime + data.search.average.uptime) / 2) * 100]
     })
   });
-  uptimeChart.updateSeries(series)
+  uptimeChart.updateSeries(series.sort((a, b) => a.data[0] - b.data[0]))
 };
 
 const updateSearchLatencySeries = (json) => {
