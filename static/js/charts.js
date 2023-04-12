@@ -256,12 +256,13 @@ const reloadSeries = async (apiUrl) => {
   const avgJson = await avgResp.json();
   const upJson = await upResp.json();
 
+  // sort json by uptime
   const sortedAvgJson = Object.fromEntries(
-    Object.entries(avgJson).sort(([, a], [, b]) => (a.search.average.latency - b.search.average.latency))
+    Object.entries(avgJson).sort(([, a], [, b]) => ((a.search.average.uptime + a.download.average.uptime + a.status.average.uptime) - (b.search.average.uptime + b.download.average.uptime + b.status.average.uptime))).reverse()
   );
 
   const sortedUpJson = Object.fromEntries(
-    Object.entries(upJson).sort(([, a], [, b]) => (a.search.average.latency - b.search.average.latency))
+    Object.entries(upJson).sort(([, a], [, b]) => ((a.search.average.uptime + a.download.average.uptime + a.status.average.uptime) - (b.search.average.uptime + b.download.average.uptime + b.status.average.uptime))).reverse()
   );
 
   updateUptimeSeries(sortedAvgJson);
