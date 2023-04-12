@@ -277,7 +277,7 @@ const updateUptimeSeries = (json) => {
       data: [((data.download.average.uptime + data.search.average.uptime) / 2) * 100]
     })
   });
-  uptimeChart.updateSeries(series.sort((a, b) => b.data[0] - a.data[0]))
+  uptimeChart.updateSeries(series)
 };
 
 var uptimeChart = new ApexCharts(document.querySelector("#uptime-chart"), chartSettings.uptime)
