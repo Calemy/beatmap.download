@@ -84,7 +84,7 @@ div.mirror-list>div.mirror>h3.degraded {
 
 div.mirror-list>div.mirror>h3.degraded>span:not(:last-child):after {
   content: " & ";
-  }
+}
 
 /* mobile responsive */
 @media only screen and (max-width: 1024px) {
@@ -158,9 +158,4 @@ div.chart-style {
   border-width: 2px;
   border-style: solid;
   padding: 25px;
-}
-
-/* peep the cursed css */
-div.apexcharts-legend-series[seriesname="series-1"] {
-  display: none !important;
 }
