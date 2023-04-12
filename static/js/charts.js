@@ -84,7 +84,7 @@ var uptimeOptions = {
   },
   yaxis: {
     max: 100,
-    min: 93,
+    min: 50,
     decimalsInFloat: 0,
 
     labels: {
