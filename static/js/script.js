@@ -74,11 +74,10 @@ const buildPage = async (apiUrl) => {
         const degradedEndpoints = document.createElement('h3')
         degradedEndpoints.classList.add('degraded')
         let down = []
-        degradedEndpoints.innerHTML += '<span>'
         for(let i = 0; i < up.length; i++) {
           if(up[i] === 0) down.push(i == 0 ? "Status" : i == 1 ? "Search" : "Download")
         }
-        degradedEndpoints.innerHTML += `${down.join(" & ")} down</span>`
+        degradedEndpoints.innerHTML = `<span>${down.join(" & ")}</span>`
         mirrorCard.appendChild(degradedEndpoints)
         break;
     }
