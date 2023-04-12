@@ -1,4 +1,16 @@
 
+let a = ['us', 'beatmap.download']
+let b = ['eu', 'eu.beatmap.download']
+const serverSwitch = document.getElementById("serverSwitch")
+serverSwitch.onclick = () => {
+  let temp = a
+  a = b
+  b = temp
+  setServer(a[1])
+  serverSwitch.innerHTML = `Switch to <span class="fi fi-${b[0]}"></span>`
+}
+
+
 const setServer = async (url) => {
   resetPage()
   setTimeout(() => buildPage(`https://${url}/api`), 500)
@@ -9,9 +21,16 @@ const resetPage = async () => {
   let id = window.setTimeout(() => {}, 0)
   while (id--) window.clearTimeout(id)
   
-  setTimeout(() => document.getElementById("center").classList.remove("aos-animate"), 10)
+  setTimeout(() => {
+    document.getElementById("center").classList.remove("aos-animate")
+    setTimeout(() => document.body.setAttribute('style', 'overflow: hidden'), 20)
+    window.scrollTo(-1, -1)
+  }, 10)
   setTimeout(() => document.querySelector(".mirror-list").innerHTML = '', 500)
-  setTimeout(() => document.getElementById("center").classList.add("aos-animate"), 500)
+  setTimeout(() => {
+    document.getElementById("center").classList.add("aos-animate")
+    document.body.setAttribute('style', 'overflow: visible')
+  }, 1000)
 }
 
 const buildPage = async (apiUrl) => {
