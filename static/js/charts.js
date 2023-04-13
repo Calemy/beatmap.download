@@ -251,12 +251,22 @@ const initSeries = async (apiUrl, json, allDataJson) => {
 }
 
 const reloadSeries = async (apiUrl) => {
-  let recentResponse = await fetch(`${apiUrl}/servers/average`);
-  let recentDataJson = await recentResponse.json();
-  let allResponse = await fetch(`${apiUrl}/servers`);
-  let allDataJson = await allResponse.json();
-  updateUptimeSeries(recentDataJson);
-  charts.forEach(chart => chart.updateSeries(allDataJson))
+  const avgResp = await fetch(`${apiUrl}/servers/average`)
+  const upResp = await fetch(`${apiUrl}/servers`)
+  const avgJson = await avgResp.json();
+  const upJson = await upResp.json();
+
+  // sort json by uptime
+  const sortedAvgJson = Object.fromEntries(
+    Object.entries(avgJson).sort(([, a], [, b]) => ((a.search.average.uptime + a.download.average.uptime + a.status.average.uptime) - (b.search.average.uptime + b.download.average.uptime + b.status.average.uptime))).reverse()
+  );
+
+  const sortedUpJson = Object.fromEntries(
+    Object.entries(upJson).sort(([, a], [, b]) => ((a.search.average.uptime + a.download.average.uptime + a.status.average.uptime) - (b.search.average.uptime + b.download.average.uptime + b.status.average.uptime))).reverse()
+  );
+
+  updateUptimeSeries(sortedAvgJson);
+  charts.forEach(chart => chart.updateSeries(sortedUpJson))
   setTimeout(() => reloadSeries(apiUrl), 60 * 1000 * 1)
 }
 
@@ -268,7 +278,7 @@ const updateUptimeSeries = (json) => {
       data: [((data.download.average.uptime + data.search.average.uptime) / 2) * 100]
     })
   });
-  uptimeChart.updateSeries(series.sort((a, b) => b.data[0] - a.data[0]))
+  uptimeChart.updateSeries(series)
 };
 
 var uptimeChart = new ApexCharts(document.querySelector("#uptime-chart"), chartSettings.uptime)
